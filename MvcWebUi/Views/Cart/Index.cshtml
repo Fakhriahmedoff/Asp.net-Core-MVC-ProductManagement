@@ -1,0 +1,37 @@
+﻿@model CartListViewModel
+
+
+<h1>Cart Items</h1>
+@if (Model.Cart.CartLines.Count == 0)
+{
+    <h2 class="badge badge-danger" >Ups Theres no item on your cart</h2>
+}
+else
+{
+    <table class="table table-responsive">
+
+        @foreach (var cartLine in Model.Cart.CartLines)
+        {
+            <thead>
+            <th>ID</th>
+            <th>Product Name</th>
+            <th>Unity Price</th>
+            <th>Quantity Per Unit</th>
+            <th>Category Id</th>
+            <th>Quantity</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td> @cartLine.Product.ProductId</td>
+                    <td> @cartLine.Product.ProductName </td>
+                    <td> @cartLine.Product.UnitPrice </td>
+                    <td> @cartLine.Product.QuantityPerUnit </td>
+                    <td> @cartLine.Product.CategoryID </td>
+                    <td> @cartLine.Quantity </td>
+                    <td><a class="btn  btn-danger" asp-controller="Cart" asp-action="RemoveFromCart" asp-route-productId="@cartLine.Product.ProductId">Delete from Cart</a> </td>
+                </tr>
+            </tbody>
+
+        }
+    </table>
+}
